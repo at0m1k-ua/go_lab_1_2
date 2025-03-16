@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<body>
+<form method="POST" action="/">
+    <h2>Введіть значення:</h2>
+    {{ range .Measurements }}
+    <label for="{{.Name}}">{{.Label}},&nbsp;</label>
+    <input type="text" name="{{.Name}}" id="{{.Name}}" value="{{.Value}}"/>
+    <span>&nbsp;{{.Units}}</span>
+    <br>
+    <br>
+    {{ end }}
+    <input type="submit" value="Обчислити" />
+    <br><br><hr><br>
+
+    {{ if .Error }}
+    <p style="color:red;">{{ .Error }}</p>
+    {{ end }}
+
+    {{ range .CalcResult }}
+    <p>{{ .Label }}: {{ .Value }} {{ .Units }}</p>
+    {{ end }}
+</form>
+</body>
+</html>
